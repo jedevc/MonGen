@@ -1,1 +1,3 @@
-console.log('MonGen')
+let NameGenerator = require('./name')
+
+console.log(NameGenerator.name())
