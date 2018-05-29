@@ -6,16 +6,18 @@ let monster = generate(5)
 console.log(monster)
 
 function generate(challenge) {
-	let stats = StatsGenerator.stats(challenge)
+	const name = NameGenerator.name()
 
-	let abilities = AbilityGenerator.abilities(stats, 'strength')
+	const stats = StatsGenerator.stats(challenge)
+	const abilities = AbilityGenerator.abilities(stats, 'strength')
+	const modifiers = AbilityGenerator.modifiers(abilities)
 
 	return {
-		name: capitalize(NameGenerator.name()),
+		name: capitalize(name),
 		challenge: challenge,
 		stats: stats,
 		abilities: abilities,
-		modifiers: AbilityGenerator.modifiers(abilities)
+		modifiers: modifiers
 	}
 }
 
