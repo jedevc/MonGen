@@ -4,13 +4,44 @@ class StatsGenerator extends Generator {
     static stats(challenge) {
         const offset = this.randint(-2, 3)
 
-        const offensive = challenge + offset
         const defensive = challenge - offset
+        const offensive = challenge + offset
 
         return {
             proficiency: table[challenge].proficiency,
-            defensive: table[defensive].defensive,
-            offensive: table[offensive].offensive,
+            defensive: this.defensive(defensive),
+            offensive: this.offensive(offensive)
+        }
+    }
+
+    static offensive(challenge) {
+        const diff = this.randint(-2, 4)
+        const offset = Math.floor(diff / 2)
+
+        const attack = table[challenge].offensive.attack + diff
+        const damage_min = table[challenge - offset].offensive.damage_min
+        const damage_max = table[challenge - offset].offensive.damage_max
+
+        return {
+            attack: attack,
+            damage_min: damage_min,
+            damage_max: damage_max,
+            save: table[challenge].offensive.save
+        }
+    }
+
+    static defensive(challenge) {
+        const diff = this.randint(-2, 4)
+        const offset = Math.floor(diff / 2)
+
+        const armor = table[challenge].defensive.armor + diff
+        const hp_min = table[challenge - offset].defensive.hp_min
+        const hp_max = table[challenge - offset].defensive.hp_max
+
+        return {
+            armor: armor,
+            hp_min: hp_min,
+            hp_max: hp_max
         }
     }
 }
