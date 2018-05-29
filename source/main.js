@@ -9,7 +9,7 @@ function generate(challenge) {
 	const name = NameGenerator.name()
 
 	const stats = StatsGenerator.stats(challenge)
-	const abilities = AbilityGenerator.abilities(stats, 'strength')
+	const abilities = AbilityGenerator.abilities(stats)
 	const modifiers = AbilityGenerator.modifiers(abilities)
 
 	return {

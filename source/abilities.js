@@ -2,7 +2,11 @@ const Generator = require('./generator')
 
 class AbilityGenerator extends Generator {
     static abilities(stats, primary) {
-        if (!abilities.includes(primary)) throw 'invalid ability type'
+        if (!primary) {
+            primary = this.choice(abilities)
+        } else if (!abilities.includes(primary)) {
+            throw 'invalid ability type'
+        }
 
         const mod = stats.offensive.attack - stats.proficiency
         const high = mod * 2 + 10 + this.randint(0, 1)
